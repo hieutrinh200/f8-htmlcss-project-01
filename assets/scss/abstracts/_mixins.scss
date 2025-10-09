@@ -1,0 +1,178 @@
+@use 'sass:color';
+@use 'sass:map';
+@use 'variables' as var;
+
+// u- Utilities
+// -----------------------------
+
+// Line clamp
+@mixin u-line-clamp($line: 2) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Flexbox
+@mixin u-flex($align: center, $justify: start, $direction: null, $gap: null) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  @if $direction {
+    flex-direction: $direction;
+  }
+  @if $gap {
+    gap: $gap;
+  }
+}
+
+// Typography
+// -----------------------------
+
+$typography-default: (
+  color: var.$color-secondary,
+  family: 'Poppins',
+  size: 1.6rem,
+  weight: 500,
+  lh: 1.5,
+  ls: null,
+);
+
+$typography-styles: (
+  heading-1: (
+    size: 6.4rem,
+    weight: 700,
+    color: var.$color-primary,
+    lh: 1.1875,
+  ),
+  heading-2: (
+    size: 3.5rem,
+    weight: 600,
+    color: var.$color-primary,
+    lh: 1.28571,
+  ),
+  heading-3: (
+    size: 2.6rem,
+    weight: 700,
+    color: var.$color-primary,
+    lh: 1,
+    ls: 0.026rem,
+  ),
+  heading-4: (
+    size: 2rem,
+    weight: 600,
+    color: var.$color-primary,
+    lh: 1,
+  ),
+  // -----------------------------
+  body-1:
+    (
+      size: 1.4rem,
+      color: var.$color-text,
+    ),
+  body-2: (
+    size: 1.6rem,
+    weight: 400,
+    color: var.$color-text-light,
+    lh: 1.875,
+  ),
+  body-3: (
+    size: 1.2rem,
+    weight: 400,
+    color: var.$color-muted,
+  ),
+  body-4: (
+    size: 1.4rem,
+    weight: 400,
+    color: var.$color-subtle,
+  ),
+  // -----------------------------
+  link:
+    (
+      size: 1.4rem,
+      weight: 600,
+      color: var.$color-accent,
+    ),
+  button: (
+    size: 1.3rem,
+    color: var.$color-bg,
+  ),
+);
+
+@function typography-config($variant, $overrides: ()) {
+  $style: map.get($typography-styles, $variant);
+  @if not $style {
+    @error "Variant `#{$variant}` not found in $typography-styles.";
+  }
+  @return map.merge(map.merge($typography-default, $style), $overrides);
+}
+
+@mixin typography($config) {
+  color: map.get($config, color);
+  font-family: map.get($config, family);
+  font-size: map.get($config, size);
+  font-weight: map.get($config, weight);
+  line-height: map.get($config, lh);
+  @if map.get($config, ls) != null {
+    letter-spacing: map.get($config, ls);
+  }
+  @content;
+}
+
+@mixin typography-variant($variant, $overrides: ()) {
+  $final: typography-config($variant, $overrides);
+  @include typography($final) {
+    @content;
+  }
+}
+
+// Button
+// -----------------------------
+
+@mixin button-base($padding-y: 1rem, $padding-x: 2.2rem, $radius: 1.2rem, $bg-color: var.$color-secondary) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: $padding-y $padding-x;
+  border: none;
+  border-radius: $radius;
+  background-color: $bg-color;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    text-decoration: none;
+    background-color: color.scale($bg-color, $lightness: 15%);
+  }
+  &:active {
+    background-color: color.scale($bg-color, $lightness: 10%);
+    transform: scale(0.98);
+  }
+  &:disabled,
+  &[aria-disabled='true'] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+// Media queries
+// -----------------------------
+
+$breakpoints: (
+  mobile: 575.98px,
+  mobileLandscape: 767.98px,
+  tablet: 991.98px,
+  laptop: 1199.98px,
+  desktop: 1399.98px,
+);
+
+@mixin screen($device) {
+  @if map.has-key($breakpoints, $device) {
+    @media (max-width: map.get($breakpoints, $device)) {
+      @content;
+    }
+  }
+}

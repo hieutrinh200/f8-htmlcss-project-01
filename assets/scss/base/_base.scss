@@ -1,0 +1,82 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  min-height: 100%;
+
+  // Scrollbar
+  scrollbar-width: thin; // Firefox
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    opacity: 0.5;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+body {
+  min-height: 100vh;
+  // display: flex; flex-direction: column; // optional layout
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+
+  &:focus {
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+input,
+button,
+textarea,
+select {
+  background: none;
+  color: inherit;
+  border: none;
+  appearance: none;
+
+  &:focus {
+    outline-offset: 2px;
+  }
+}
+
+button {
+  cursor: pointer;
+  background: none;
+}
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}

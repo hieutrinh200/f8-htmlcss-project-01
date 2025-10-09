@@ -1,0 +1,93 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mix;
+
+.clients {
+  padding-block: 4.3rem 2.3rem;
+  margin-top: 7.9rem;
+  background-color: var.$color-bg;
+
+  &__header {
+    @include mix.u-flex(center, space-between);
+  }
+
+  &__desc,
+  &__ratings-desc {
+    @include mix.typography-variant(
+      body-2,
+      (
+        color: #7d8589,
+        lh: 1.25,
+      )
+    );
+  }
+
+  &__desc {
+    margin-top: 2.3rem;
+  }
+  &__ratings-desc {
+    margin-top: 1.8rem;
+  }
+
+  &__stars {
+    @include mix.u-flex(center, end, null, 0.4rem);
+    height: 1.9rem;
+  }
+
+  &__companies {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin-top: 7rem;
+  }
+
+  &__company-link {
+    @include mix.u-flex(center, center);
+    height: 9.1rem;
+    border-radius: 1.2rem;
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Responsive
+  @include mix.screen(laptop) {
+    &__companies {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.6rem;
+    }
+  }
+
+  @include mix.screen(tablet) {
+    &__companies {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @include mix.screen(mobileLandscape) {
+    &__header {
+      @include mix.u-flex(center, center, column, 2.4rem);
+      text-align: center;
+    }
+    &__trust {
+      @include mix.u-flex(center, center, column);
+    }
+    &__ratings {
+      text-align: center;
+    }
+    &__stars {
+      justify-content: center;
+    }
+    &__companies {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.6rem;
+    }
+  }
+
+  @include mix.screen(mobile) {
+    &__companies {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+  }
+}

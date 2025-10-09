@@ -1,0 +1,131 @@
+@use 'sass:color';
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mixin;
+
+.guides {
+  padding: 7.9rem 0;
+  margin-top: 4rem;
+  background-color: var.$color-bg;
+
+  &__header {
+    text-align: center;
+  }
+
+  &__title {
+    position: relative;
+    @include mixin.typography-variant(heading-2);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -1rem;
+      left: 50%;
+      width: 4.1rem;
+      height: 0.4rem;
+      transform: translateX(-50%);
+      border-radius: 1.2rem;
+      background: var.$color-primary;
+    }
+  }
+
+  &__desc {
+    max-width: 45.9rem;
+    margin: 2rem auto 0;
+    @include mixin.typography-variant(body-2);
+  }
+
+  &__list {
+    @include mixin.u-flex(center, center, row, 2rem);
+    flex-wrap: wrap;
+    margin-top: 7rem;
+  }
+
+  &__item {
+    @include mixin.u-flex(center, center, column);
+    width: 28rem;
+  }
+
+  &__item-title {
+    margin-top: 2.6rem;
+    @include mixin.typography-variant(
+      heading-4,
+      (
+        color: #3b3c45,
+        weight: 500,
+        lh: 1.1,
+      )
+    );
+  }
+
+  &__link {
+    @include mixin.u-flex(center, center, row, 0.8rem);
+    @include mixin.typography-variant(link);
+    position: relative;
+    margin-top: 1rem;
+    overflow: hidden;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: color.scale(#0689ff, $lightness: -20%);
+      text-decoration: none;
+    }
+  }
+
+  &__cta {
+    margin-top: 5rem;
+    text-align: center;
+  }
+
+  &__btn {
+    @include mixin.typography-variant(button);
+    @include mixin.button-base(1.4rem, 2.4rem);
+  }
+}
+
+// Responsive
+@include mixin.screen(laptop) {
+  .guides__list {
+    gap: 3rem;
+  }
+}
+
+@include mixin.screen(mobileLandscape) {
+  .guides {
+    &__desc {
+      max-width: 100%;
+      font-size: 1.5rem;
+    }
+
+    &__list {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__item {
+      width: 100%;
+      max-width: 32rem;
+    }
+  }
+}
+
+@include mixin.screen(mobile) {
+  .guides {
+    padding: 5rem 0;
+    margin-top: 2rem;
+
+    &__title {
+      font-size: 2.6rem;
+    }
+    &__desc {
+      font-size: 1.4rem;
+      margin-top: 1.2rem;
+    }
+    &__item-title {
+      font-size: 1.8rem;
+    }
+    &__btn {
+      font-size: 1.4rem;
+      padding: 1rem 2rem;
+    }
+  }
+}

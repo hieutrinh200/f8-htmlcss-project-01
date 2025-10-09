@@ -1,0 +1,149 @@
+@use 'sass:color';
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mixin;
+
+.footer {
+  padding: 5rem 0 5.8rem;
+  margin-top: 5.5rem;
+
+  &__links {
+    @include mixin.u-flex(flex-start, space-between);
+  }
+
+  &__column {
+    max-width: 25.7rem;
+  }
+
+  &__heading {
+    @include mixin.typography-variant(
+      heading-4,
+      (
+        family: var.$font-alt,
+        color: #1c1c1d,
+        weight: 700,
+      )
+    );
+  }
+
+  &__list {
+    margin-top: 4rem;
+    display: grid;
+    gap: 1.8rem;
+  }
+
+  &__link {
+    @include mixin.typography-variant(
+      body-2,
+      (
+        color: #7a7a7e,
+      )
+    );
+
+    &:hover::after {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  &__desc {
+    @include mixin.typography-variant(
+      body-2,
+      (
+        color: #7a7a7e,
+      )
+    );
+    margin-top: 4rem;
+  }
+
+  &__social {
+    margin-top: 4rem;
+    display: flex;
+    gap: 1.6rem;
+
+    &-link {
+      @include mixin.u-flex(center, center);
+      width: 2.847rem;
+      height: 2.847rem;
+      border-radius: 0.3rem;
+      background-color: #f9f9f9;
+      transition: transform 0.15s ease, background-color 0.2s ease;
+
+      &:hover {
+        background-color: color.scale(#f9f9f9, $lightness: -5%);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+
+  &__bottom {
+    @include mixin.u-flex(center, space-between);
+    margin-top: 8.1rem;
+  }
+
+  &__copyright {
+    @include mixin.typography-variant(
+      body-4,
+      (
+        color: #c2c2c2,
+      )
+    );
+  }
+
+  // Responsive
+  @include mixin.screen(laptop) {
+    &__links {
+      gap: 2rem;
+    }
+    &__bottom {
+      gap: 3rem;
+    }
+  }
+
+  @include mixin.screen(mobileLandscape) {
+    &__links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6rem 3rem;
+      text-align: center;
+    }
+
+    &__column:last-child {
+      grid-column: 1 / -1;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    &__social {
+      justify-content: center;
+    }
+
+    &__bottom {
+      flex-direction: column;
+      gap: 2rem;
+      text-align: center;
+    }
+  }
+
+  @include mixin.screen(mobile) {
+    &__links {
+      grid-template-columns: 1fr;
+      gap: 2.4rem;
+    }
+
+    &__column {
+      max-width: 100%;
+    }
+
+    &__desc {
+      width: 60%;
+      margin-inline: auto;
+    }
+
+    &__bottom {
+      margin-top: 5rem;
+    }
+  }
+}

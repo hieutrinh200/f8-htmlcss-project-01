@@ -1,0 +1,94 @@
+@use 'sass:color';
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mixin;
+
+.subscription {
+  margin-top: 5.1rem;
+
+  &__body {
+    @include mixin.u-flex(center, space-between);
+    position: relative;
+    height: 37.9rem;
+    padding: 8rem;
+    border-radius: 2rem;
+    background-color: var.$bg-subscription;
+  }
+
+  &__info {
+    max-width: 58%;
+    z-index: 1;
+  }
+
+  &__title {
+    @include mixin.typography-variant(
+      heading-2,
+      (
+        color: #fff,
+      )
+    );
+  }
+
+  &__desc {
+    margin-top: 1.5rem;
+    opacity: 0.75;
+    @include mixin.typography-variant(
+      body-2,
+      (
+        color: #fff,
+      )
+    );
+  }
+
+  &__btn {
+    @include mixin.button-base(1.6rem, 4.2rem, $bg-color: var.$color-bg);
+    @include mixin.typography-variant(
+      button,
+      (
+        color: #002366,
+      )
+    );
+    margin-top: 2rem;
+
+    &:hover {
+      background-color: color.scale(var.$color-bg, $lightness: -10%);
+    }
+  }
+
+  &__media {
+    position: absolute;
+    bottom: 0;
+    right: 8rem;
+    width: 30rem;
+  }
+
+  // Responsive
+  @include mixin.screen(tablet) {
+    &__media {
+      display: none;
+    }
+    &__info {
+      max-width: 100%;
+    }
+  }
+
+  @include mixin.screen(mobileLandscape) {
+    &__body {
+      flex-direction: column;
+      height: auto;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+  }
+
+  @include mixin.screen(mobile) {
+    &__title {
+      font-size: 2.8rem;
+    }
+    &__desc {
+      font-size: 1.4rem;
+    }
+    &__btn {
+      width: 100%;
+    }
+  }
+}

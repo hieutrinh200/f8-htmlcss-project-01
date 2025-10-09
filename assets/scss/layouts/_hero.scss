@@ -1,0 +1,97 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mix;
+
+.hero {
+  @include mix.u-flex;
+  position: relative;
+  min-height: calc(100vh - 9.5rem);
+  padding-block: 5rem;
+  background-color: var.$bg-header;
+
+  &__content {
+    max-width: 52%;
+    @include mix.u-flex($align: start, $direction: column);
+  }
+
+  &__subtitle {
+    @include mix.typography-variant(
+      body-2,
+      (
+        size: 1.8rem,
+        color: #687690,
+        ls: 0.018rem,
+      )
+    );
+  }
+
+  &__title {
+    @include mix.typography-variant(heading-1);
+    margin-top: 0.8rem;
+  }
+
+  &__desc {
+    @include mix.typography-variant(
+      body-2,
+      (
+        size: 1.8rem,
+        lh: 1.77778,
+      )
+    );
+    margin-top: 3rem;
+  }
+
+  &__btn {
+    @include mix.button-base(1.5rem, 3.8rem);
+    @include mix.typography-variant(button);
+    margin-top: 4rem;
+  }
+
+  &__media {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 48%;
+  }
+
+  // Responsive
+  @include mix.screen(laptop) {
+    &__content {
+      max-width: 60%;
+    }
+    &__title {
+      font-size: 5.2rem;
+    }
+    &__media {
+      width: 42%;
+    }
+  }
+
+  @include mix.screen(tablet) {
+    min-height: calc(100vh - 5.6rem);
+  }
+
+  @include mix.screen(mobileLandscape) {
+    text-align: center;
+
+    &__content {
+      max-width: 100%;
+      align-items: center;
+    }
+
+    &__media {
+      display: none;
+    }
+  }
+
+  @include mix.screen(mobile) {
+    padding-block: 3rem;
+
+    &__btn {
+      width: 80%;
+    }
+    &__content {
+      max-width: 90%;
+      margin-inline: auto;
+    }
+  }
+}
