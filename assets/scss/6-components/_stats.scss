@@ -1,0 +1,248 @@
+@use '../1-settings' as settings;
+@use '../2-tools' as tools;
+
+.stats {
+  padding-block: 3.12rem;
+  padding-inline: 1.94rem;
+  margin-block-start: 4.69rem;
+
+  &__inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__media {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    inline-size: 50%;
+  }
+
+  &__image {
+    inline-size: 32rem;
+    max-block-size: 28.75rem;
+    border-radius: 0.75rem;
+    object-fit: cover;
+    box-shadow: 40px 80px 155px 0 rgba(30, 103, 113, 0.03);
+  }
+
+  &__trend {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    inline-size: 14.9375rem;
+    padding-block: 2.81rem 2.53rem;
+    padding-inline: 1.37rem 1.44rem;
+    border-radius: 0 0 0.75rem 0.75rem;
+    background-color: #fff;
+    box-shadow: 90px 85px 100px 0 rgba(0, 0, 0, 0.06);
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &-value {
+      font-size: 1.625rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.01625rem;
+      color: settings.$color-text-primary;
+    }
+
+    &-description {
+      margin-block-start: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #a7a7a7;
+    }
+
+    &-divider {
+      inline-size: 100%;
+      block-size: 1.2px;
+      margin-block-start: 1.59rem;
+      background-color: #e9e9e9;
+    }
+
+    &-avatars {
+      margin-block-start: 1.61rem;
+    }
+  }
+
+  &__avatar {
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.02rem 0.87rem;
+    }
+
+    &-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-item {
+      margin-inline-start: -0.19rem;
+    }
+
+    &-img {
+      inline-size: 1.021rem;
+      block-size: 1.021rem;
+      border-radius: 50%;
+      background: var(--bg-color, lightgray);
+      box-shadow: 0.4rem 0.4rem 1.6rem rgba(0, 0, 0, 0.1);
+
+      &--initial {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Circular Std';
+        font-size: 7.261px;
+        font-weight: 450;
+        letter-spacing: -0.0145rem;
+        color: #fff;
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    inline-size: 50%;
+  }
+
+  &__title {
+    position: relative;
+    inline-size: 60%;
+    font-size: 2.1875rem;
+    font-weight: 600;
+    line-height: 1.28571;
+    color: settings.$color-text-primary;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset-block-start: -0.62rem;
+      inset-inline-start: 0;
+      inline-size: 2.5625rem;
+      block-size: 0.25rem;
+      border-radius: 0.75rem;
+      background-color: settings.$color-text-primary;
+    }
+  }
+
+  &__description {
+    inline-size: 60%;
+    margin-block-start: 1.25rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.875;
+    color: settings.$color-text-secondary;
+  }
+
+  &__quantity {
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 5rem;
+      margin-block-start: 6.87rem;
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &-value {
+      font-size: 4rem;
+      font-weight: 600;
+      line-height: 1;
+      color: #000;
+    }
+
+    &-label {
+      margin-block-start: 1.5rem;
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: #7b8087;
+    }
+  }
+
+  @include tools.respond-max(desktop) {
+    &__image {
+      inline-size: 25rem;
+    }
+    &__title,
+    &__description {
+      inline-size: 80%;
+    }
+  }
+
+  @include tools.respond-max(laptop) {
+    &__title,
+    &__description {
+      inline-size: 90%;
+    }
+  }
+
+  @include tools.respond-max(tablet) {
+    &__inner {
+      flex-direction: column;
+    }
+
+    &__media {
+      justify-content: center;
+      inline-size: 100%;
+    }
+
+    &__content {
+      inline-size: 90%;
+      margin-block-start: 2.5rem;
+      align-items: center;
+      text-align: center;
+    }
+
+    &__title {
+      font-size: 1.75rem;
+      &::before {
+        display: none;
+      }
+    }
+
+    &__description {
+      font-size: 0.95rem;
+    }
+
+    &__trend {
+      display: none;
+    }
+
+    &__quantity-list {
+      gap: 3rem;
+      margin-block-start: 4rem;
+    }
+  }
+
+  @include tools.respond-max(mobile) {
+    &__title,
+    &__description {
+      inline-size: 100%;
+    }
+
+    &__quantity-value {
+      font-size: 2.5rem;
+    }
+
+    &__quantity-label {
+      font-size: 1rem;
+    }
+  }
+}

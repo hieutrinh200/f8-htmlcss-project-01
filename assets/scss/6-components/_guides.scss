@@ -1,0 +1,122 @@
+@use '../1-settings' as settings;
+@use '../2-tools' as tools;
+
+.guides {
+  padding-block: 4.9375rem;
+  padding-inline: 13.25rem;
+  margin-block-start: 2.5rem;
+
+  &__header {
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 2.1875rem;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    color: settings.$color-text-primary;
+  }
+
+  &__description {
+    max-inline-size: 75%;
+    margin-block-start: 1.25rem;
+    margin-inline: auto;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.875;
+    color: settings.$color-text-secondary;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 3rem;
+    margin-block-start: 4.38rem;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__icon {
+    inline-size: 3rem;
+    block-size: 3rem;
+  }
+
+  &__item-title {
+    margin-block-start: 1.63rem;
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.1;
+    text-align: center;
+    color: #3b3c45;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-block-start: 0.62rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: settings.$color-text-accent;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      color: color-mix(in srgb, settings.$color-text-accent 85%, black);
+      transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid settings.$color-text-accent;
+      outline-offset: 2px;
+    }
+  }
+
+  &__cta {
+    margin-block-start: 3.13rem;
+    text-align: center;
+  }
+
+  &__btn {
+    padding-block: 0.9rem;
+    padding-inline: 1.5rem;
+    border-radius: 0.75rem;
+  }
+
+  @include tools.respond-max(tablet) {
+    padding-inline: 6.25rem;
+
+    &__description {
+      max-inline-size: 90%;
+    }
+
+    &__list {
+      gap: 2rem;
+    }
+  }
+
+  @include tools.respond-max(mobile) {
+    padding-inline: 1.25rem;
+
+    &__description {
+      max-inline-size: 100%;
+      font-size: 0.95rem;
+    }
+
+    &__list {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    &__btn {
+      inline-size: 80%;
+    }
+  }
+}

@@ -1,0 +1,87 @@
+@use '../2-tools' as tools;
+
+.subscription {
+  margin-block-start: 3.19rem;
+
+  &__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-block-size: 23.663rem;
+    padding: 5rem;
+    border-radius: 1.25rem;
+    background-color: #063183;
+  }
+
+  &__content {
+    max-inline-size: 65%;
+  }
+
+  &__title {
+    font-size: 2.1875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #fff;
+  }
+
+  &__description {
+    margin-block-start: 0.94rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.875;
+    color: #fff;
+    opacity: 0.75;
+  }
+
+  &__btn {
+    margin-block-start: 1.25rem;
+    padding-block: 0.9rem;
+    padding-inline: 2.65rem;
+    border-radius: 0.75rem;
+  }
+
+  &__media {
+    position: absolute;
+    inset-block-end: 0;
+    inset-inline-start: 65%;
+  }
+
+  @include tools.respond-max(tablet) {
+    &__inner {
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    &__content {
+      max-inline-size: 90%;
+      text-align: center;
+    }
+
+    &__title {
+      font-size: 1.875rem;
+    }
+
+    &__media {
+      display: none;
+    }
+  }
+
+  @include tools.respond-max(mobile) {
+    &__inner {
+      padding: 1.5rem;
+    }
+
+    &__title {
+      font-size: 1.5rem;
+    }
+
+    &__description {
+      font-size: 0.95rem;
+    }
+
+    &__btn {
+      inline-size: 80%;
+    }
+  }
+}

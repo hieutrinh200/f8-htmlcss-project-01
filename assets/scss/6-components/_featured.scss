@@ -1,0 +1,147 @@
+@use '../1-settings' as settings;
+@use '../2-tools' as tools;
+
+.features {
+  padding-block: 6.88rem;
+  margin-block-start: 2.56rem;
+  background-color: settings.$color-bg-secondary;
+
+  &__header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  &__title {
+    font-size: 2.1875rem;
+    font-weight: 600;
+    line-height: 1;
+    color: settings.$color-text-primary;
+  }
+
+  &__description {
+    margin-block-start: 0.94rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.875;
+    color: settings.$color-text-secondary;
+  }
+
+  &__view-all {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: settings.$color-text-accent;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    &:hover {
+      color: color-mix(in srgb, settings.$color-text-accent 85%, black);
+      transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid settings.$color-text-accent;
+      outline-offset: 2px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 3rem;
+    margin-block-start: 4.25rem;
+  }
+
+  &__item {
+    inline-size: 21.875rem;
+    border-radius: 0.75rem;
+    background-color: #fff;
+    box-shadow: 0 65px 80px -46px rgba(226, 238, 249, 0.6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    will-change: transform, box-shadow;
+
+    &:hover {
+      transform: translateY(-0.75rem);
+      box-shadow: 0 50px 80px -40px rgba(226, 238, 249, 0.75);
+    }
+
+    &-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1;
+      color: settings.$color-text-primary;
+    }
+
+    &-description {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #a3a6ab;
+      margin-block-start: 0.69rem;
+    }
+
+    &-stats {
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      margin-block-start: 1.12rem;
+    }
+  }
+
+  &__thumbnail {
+    inline-size: 21.875rem;
+    block-size: 14.1875rem;
+    object-fit: cover;
+    border-start-start-radius: 0.75rem;
+    border-start-end-radius: 0.75rem;
+  }
+
+  &__body {
+    padding-block: 1.06rem 1.56rem;
+    padding-inline: 1.25rem;
+  }
+
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  @include tools.respond-max(tablet) {
+    &__header-info {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    &__title {
+      text-align: center;
+    }
+
+    &__list {
+      justify-content: center;
+      gap: 2.5rem;
+    }
+  }
+
+  @include tools.respond-max(mobile) {
+    &__list {
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    &__item,
+    &__thumbnail {
+      inline-size: 100%;
+      max-inline-size: 20rem;
+    }
+  }
+}

@@ -1,0 +1,121 @@
+@use '../1-settings' as settings;
+@use '../2-tools' as tools;
+
+.hero {
+  background-color: settings.$color-bg-primary;
+
+  &__inner {
+    position: relative;
+    display: flex;
+    min-block-size: calc(100vh - 6.6875rem);
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    max-inline-size: 50%;
+  }
+
+  &__subtitle {
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: 0.01125rem;
+    color: #687690;
+  }
+
+  &__title {
+    margin-block-start: 0.5rem;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.1875;
+    color: settings.$color-text-primary;
+  }
+
+  &__description {
+    margin-block-start: 1.88rem;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.778;
+    color: settings.$color-text-secondary;
+  }
+
+  &__btn {
+    margin-block-start: 2.5rem;
+    padding-block: 0.94rem;
+    padding-inline: 2.34rem;
+    border-radius: 0.75rem;
+  }
+
+  &__media {
+    position: absolute;
+    inset-inline-end: -3%;
+    inset-block-end: 0;
+    max-inline-size: 50%;
+  }
+
+  @include tools.respond-max(laptop) {
+    &__inner {
+      min-block-size: calc(100vh - 4.9rem);
+    }
+
+    &__content {
+      max-inline-size: 60%;
+    }
+
+    &__title {
+      font-size: 3.25rem;
+    }
+
+    &__media {
+      max-inline-size: 42%;
+    }
+  }
+
+  @include tools.respond-max(tablet) {
+    &__inner {
+      min-block-size: auto;
+      padding-block: 6rem;
+    }
+
+    &__content {
+      align-items: center;
+      margin-inline: auto;
+      max-inline-size: 90%;
+      text-align: center;
+    }
+
+    &__title {
+      margin-block-start: 0.75rem;
+      font-size: 2.5rem;
+    }
+
+    &__description {
+      margin-block-start: 1.5rem;
+    }
+
+    &__btn {
+      margin-block-start: 2.5rem;
+    }
+
+    &__media {
+      display: none;
+    }
+  }
+
+  @include tools.respond-max(mobile) {
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__description {
+      margin-block-start: 1.25rem;
+      font-size: 1rem;
+    }
+
+    &__btn {
+      inline-size: 80%;
+    }
+  }
+}

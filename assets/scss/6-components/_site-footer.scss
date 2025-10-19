@@ -1,0 +1,138 @@
+@use '../2-tools' as tools;
+
+.site-footer {
+  padding-block: 3.12rem 3.62rem;
+  margin-block-start: 3.44rem;
+
+  &__links {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__column {
+    max-inline-size: 16.0625rem;
+  }
+
+  &__heading {
+    font-family: Lato;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1c1c1d;
+  }
+
+  &__list {
+    display: grid;
+    gap: 1.31rem;
+    margin-block-start: 2.5rem;
+    padding-inline-start: 0;
+    list-style-type: none;
+  }
+
+  &__link {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #7a7a7e;
+    text-decoration: none;
+
+    &:hover::after {
+      inline-size: 100%;
+      inset-inline-start: 0;
+    }
+  }
+
+  &__description {
+    margin-block-start: 2.5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #7a7a7e;
+  }
+
+  &__social {
+    display: flex;
+    gap: 1rem;
+    margin-block-start: 2.5rem;
+
+    &-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      inline-size: 1.78rem;
+      block-size: 1.78rem;
+      border-radius: 0.3rem;
+      background-color: #f9f9f9;
+      transition: transform 0.15s ease, background-color 0.2s ease;
+
+      &:hover {
+        background-color: color-mix(in srgb, #f9f9f9 92%, black);
+      }
+
+      &:active {
+        background-color: color-mix(in srgb, #f9f9f9 88%, black);
+        transform: scale(0.98);
+      }
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-start: 5.06rem;
+  }
+
+  &__copyright {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #c2c2c2;
+  }
+
+  @include tools.respond-max(laptop) {
+    &__links {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6rem 3rem;
+      text-align: center;
+    }
+
+    &__column:last-child {
+      grid-column: 1 / -1;
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    &__social {
+      justify-content: center;
+    }
+
+    &__bottom {
+      flex-direction: column;
+      gap: 2rem;
+      text-align: center;
+    }
+  }
+
+  @include tools.respond-max(mobile) {
+    &__links {
+      grid-template-columns: 1fr;
+      gap: 2.4rem;
+    }
+
+    &__column {
+      max-inline-size: 100%;
+    }
+
+    &__description {
+      inline-size: 80%;
+      margin-inline: auto;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    &__bottom {
+      margin-block-start: 5rem;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+}

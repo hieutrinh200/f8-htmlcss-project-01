@@ -1,0 +1,186 @@
+@use 'sass:map';
+@use '../1-settings' as settings;
+@use '../2-tools' as tools;
+
+.site-header {
+  padding-block: 2.375rem 1rem;
+  background-color: settings.$color-bg-primary;
+
+  &--sticky {
+    position: sticky;
+    inset-block-start: -1.375rem;
+    z-index: map.get(settings.$z-index, sticky);
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    inline-size: 100%;
+
+    &-list {
+      display: flex;
+      gap: 1.75rem;
+      list-style-type: none;
+    }
+
+    &-item {
+      max-inline-size: 100%;
+    }
+
+    &-link {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: #4f5361;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.12rem;
+      margin-inline-start: auto;
+    }
+
+    &-action {
+      color: #0f1b4c;
+    }
+
+    &-btn {
+      padding-block: 0.6rem;
+      padding-inline: 1.4rem;
+      color: #fff;
+      border-radius: 0.5rem;
+    }
+  }
+
+  &__toggle {
+    display: none;
+    position: absolute;
+    inset-inline-end: 0;
+    margin-inline-end: 1rem;
+    inline-size: 2rem;
+    block-size: 2rem;
+    color: settings.$color-bg-button;
+    cursor: pointer;
+
+    svg {
+      inline-size: 100%;
+      block-size: 100%;
+    }
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: map.get(settings.$z-index, overlay);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  &__drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset-block: 0;
+    inset-inline: auto 0;
+    z-index: map.get(settings.$z-index, modal);
+    inline-size: 20rem;
+    max-inline-size: 80%;
+    padding-block: 1rem;
+    background: settings.$color-bg-primary;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+
+    .site-header__nav {
+      &-list {
+        flex-direction: column;
+      }
+
+      &-link {
+        font-size: 1rem;
+      }
+
+      &-actions {
+        flex-direction: column;
+        inline-size: 100%;
+        margin-block: auto 0;
+      }
+
+      &-btn {
+        inline-size: 90%;
+        font-size: 1rem;
+      }
+    }
+
+    .btn--secondary {
+      color: settings.$color-text-primary;
+    }
+  }
+
+  &__checkbox {
+    display: none;
+  }
+
+  &__checkbox:checked ~ &__overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__checkbox:checked ~ &__drawer {
+    transform: translateX(0);
+  }
+
+  @media (max-width: 960px) {
+    &__nav {
+      display: none;
+    }
+    &__toggle {
+      display: block;
+    }
+  }
+
+  @include tools.respond-max(tablet) {
+    padding-block: 1rem;
+
+    &--sticky {
+      inset-block-start: 0;
+    }
+
+    &__inner {
+      justify-content: space-between;
+    }
+
+    &__drawer {
+      inline-size: 22rem;
+      max-inline-size: 85%;
+    }
+  }
+
+  @include tools.respond-max(mobile) {
+    &__drawer {
+      inline-size: 18rem;
+      max-inline-size: 90%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__overlay,
+    &__drawer {
+      transition: none;
+    }
+  }
+}
